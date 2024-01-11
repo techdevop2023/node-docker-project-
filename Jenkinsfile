@@ -24,9 +24,8 @@ pipeline {
        }
        stage('Docker Push'){
           steps {
-            withCredentials([usernamePassword(credentailsId:'docker_cred',passwordVariable: 'DOCKERHUB_PASSWORD',usernameVariable: 'DOCKERHUB_USERNAME')] )){
+            withCredentials([usernamePassword(credentailsId:'docker_hub',passwordVariable: 'DOCKERHUB_PASSWORD',usernameVariable: 'DOCKERHUB_USERNAME')]){
                 sh'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                sh 'docker tag webapp:1.0 virendargupta/webapp:1.0'
                 sh 'docker push virendargupta/webapp:1.0'
                 sh 'docker agent'
             }
