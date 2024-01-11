@@ -28,7 +28,7 @@ pipeline {
                 sh'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
                 sh 'docker tag webapp:1.0 virendargupta/webapp:1.0'
                 sh 'docker push virendargupta/webapp:1.0'
-                sh 'docker agent'
+                sh 'docker logout'
             }
           }
        }
