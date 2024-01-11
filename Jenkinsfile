@@ -8,7 +8,7 @@ pipeline {
       }
        stage("Test"){
          steps{
-            sh 'sudo apt-get install npm'
+            sh 'sudo apt-get install npm '
             sh 'npm test'
          }  
        }
@@ -16,6 +16,11 @@ pipeline {
         steps{
             sh 'npm run build'
         }
+       }
+       stage("Build Image"){
+          steps {
+              sh 'docker build -t webapp:1.0 .'
+          }
        }
    }
 }
