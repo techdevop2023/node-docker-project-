@@ -22,5 +22,14 @@ pipeline {
               sh 'docker build -t webapp:1.0 .'
           }
        }
+       stage('Docker Push'){
+          steps {
+            withCredentials(usernamePassword(credentailsId:'docker_hub',passwordVariable: 'DOCKERHUB_PASSWORD',usernameVariable: 'DOCKERHUB_USERNAME')] )){
+                sh'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                sh 'docker push virendargupta/webapp:1.0'
+                sh 'docker agent'
+            }
+          }
+       }
    }
 }
